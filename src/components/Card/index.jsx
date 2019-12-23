@@ -9,7 +9,7 @@ import DropOffPresent from "../../assets/dropOffBadgePresent.svg";
 import axios from "axios";
 
 const Card = props => {
-  const { handleChange, address, setAddress, setToggleToast } = props;
+  const { handleChange, trip, setTrip, setToggleToast } = props;
 
   const changeMarkerPickUp = icon => {
     return icon.longitude === null
@@ -27,9 +27,9 @@ const Card = props => {
   };
 
   const enableButton =
-    address.pickup.longitude !== null &&
-    address.dropoff.longitude !== null &&
-    (address.pickup.longitude !== "" && address.dropoff.longitude !== "");
+    trip.pickup.longitude !== null &&
+    trip.dropoff.longitude !== null &&
+    (trip.pickup.longitude !== "" && trip.dropoff.longitude !== "");
 
   const activateButton = style => {
     return style ? "button-card" : "button-card-oppacity";
@@ -44,7 +44,7 @@ const Card = props => {
       .post("https://stuart-frontend-challenge.now.sh/jobs", submitAdress)
       .then(res => {
         console.log(res);
-        setAddress({
+        setTrip({
           pickup: { address: "", latitude: "", longitude: "" },
           dropoff: { address: "", latitude: "", longitude: "" }
         });
@@ -58,9 +58,9 @@ const Card = props => {
   return (
     <View
       handleChange={handleChange}
-      address={address}
-      changeMarkerPickUp={changeMarkerPickUp(address.pickup)}
-      changeMarkerDropOff={changeMarkerDropOff(address.dropoff)}
+      trip={trip}
+      changeMarkerPickUp={changeMarkerPickUp(trip.pickup)}
+      changeMarkerDropOff={changeMarkerDropOff(trip.dropoff)}
       enableButton={enableButton}
       activateButton={activateButton(enableButton)}
       handleSubmit={handleSubmit}

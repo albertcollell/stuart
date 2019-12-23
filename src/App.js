@@ -1,5 +1,4 @@
-import React, { useState, useCallback } from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
 import Map from "./components/Map";
 import Card from "./components/Card";
@@ -8,7 +7,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
-  const [address, setAddress] = useState({
+  const [trip, setTrip] = useState({
     pickup: { address: "", latitude: "", longitude: "" },
     dropoff: { address: "", latitude: "", longitude: "" }
   });
@@ -26,7 +25,7 @@ const App = () => {
       .post("https://stuart-frontend-challenge.now.sh/geocode", address)
       .then(res => {
         const response = res.data;
-        setAddress(prevState => ({
+        setTrip(prevState => ({
           ...prevState,
           [key]: {
             address: response.address,
@@ -37,7 +36,7 @@ const App = () => {
         }));
       })
       .catch(error => {
-        setAddress(prevState => ({
+        setTrip(prevState => ({
           ...prevState,
           [key]: {
             address: null,
@@ -53,12 +52,12 @@ const App = () => {
     <div>
       <Card
         handleChange={handleChange}
-        address={address}
-        setAddress={setAddress}
+        trip={trip}
+        setTrip={setTrip}
         setToggleToast={setToggleToast}
       />
       <Toaster toggleToast={toggleToast} setToggleToast={setToggleToast} />
-      <Map address={address} />
+      <Map trip={trip} />
     </div>
   );
 };

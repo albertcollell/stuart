@@ -1,5 +1,5 @@
 import styles from "../../styles/main.module.scss";
-import React, { useEffect } from "react";
+import React from "react";
 
 const View = props => {
   const {
@@ -9,7 +9,7 @@ const View = props => {
     enableButton,
     activateButton,
     handleSubmit,
-    address
+    trip
   } = props;
 
   return (
@@ -22,11 +22,12 @@ const View = props => {
           <input
             className={styles["input-adress"]}
             type="text"
-            value={address.pickup.address}
+            value={trip.pickup.address}
             placeholder="Pick Up Adress"
             name="pickup"
             onChange={handleChange}
           />
+          {console.log(trip.pickup.address)}
         </div>
       </div>
       <div className={styles["row"]}>
@@ -37,7 +38,7 @@ const View = props => {
           <input
             className={styles["input-adress"]}
             type="text"
-            value={address.dropoff.address}
+            value={trip.dropoff.address}
             placeholder="Drop Off Adress"
             name="dropoff"
             onChange={handleChange}
@@ -49,7 +50,7 @@ const View = props => {
         <div className={styles["column-2"]}>
           <button
             disabled={!enableButton}
-            onClick={() => handleSubmit(address)}
+            onClick={() => handleSubmit(trip)}
             className={styles[`${activateButton}`]}
           >
             Create Job

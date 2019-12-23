@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GoogleMapReact from "google-map-react";
-import View from "./view";
 import PickUpMarker from "../../assets/pickUpMarker.svg";
 import DropOffMarker from "../../assets/dropOffMarker.svg";
 
 const Map = props => {
-  const { address } = props;
+  const { trip } = props;
   const center = { lat: 48.86, lng: 2.321 };
   const zoom = 14;
-  const addressArray = Object.keys(address);
+  const addressArray = Object.keys(trip);
 
   return (
     <div style={{ height: "100vh", width: "100%", zIndex: "-1" }}>
@@ -20,19 +19,19 @@ const Map = props => {
         {addressArray.map(x => {
           return x === "pickup" ? (
             <div
-              lat={address.pickup.latitude}
-              lng={address.pickup.longitude}
+              lat={trip.pickup.latitude}
+              lng={trip.pickup.longitude}
               text={x}
             >
-              <img src={PickUpMarker} />
+              <img src={PickUpMarker} alt="pickup-marker" />
             </div>
           ) : (
             <div
-              lat={address.dropoff.latitude}
-              lng={address.dropoff.longitude}
+              lat={trip.dropoff.latitude}
+              lng={trip.dropoff.longitude}
               text={x}
             >
-              <img src={DropOffMarker} />
+              <img src={DropOffMarker} alt="dropoff-marker" />
             </div>
           );
         })}
