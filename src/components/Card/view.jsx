@@ -22,6 +22,7 @@ const View = props => {
           <input
             className={styles["input-adress"]}
             type="text"
+            value={address.pickup.address}
             placeholder="Pick Up Adress"
             name="pickup"
             onChange={handleChange}
@@ -36,6 +37,7 @@ const View = props => {
           <input
             className={styles["input-adress"]}
             type="text"
+            value={address.dropoff.address}
             placeholder="Drop Off Adress"
             name="dropoff"
             onChange={handleChange}
